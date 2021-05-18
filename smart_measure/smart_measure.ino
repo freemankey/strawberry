@@ -36,7 +36,7 @@ void loop()
     else
     {
         n_weight = scale.get_units(10);
-        if (abs(n_weight - p_weight) < error && n_weight - b_weight >= 5) /*現在値が前回値よりerror値よりも小さくなっていればイチゴが取られたと判定する*/
+        if (abs(n_weight - p_weight) < error && abs(n_weight - b_weight) >= 5) /*現在値が前回値よりerror値よりも小さくなっていればイチゴが取られたと判定する*/
         {
             ichigo_weight = n_weight - b_weight;
             　 //イチゴの値を更新＊ただし，この値は数ループの間しか保持できない
