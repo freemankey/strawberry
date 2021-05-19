@@ -2,12 +2,12 @@
 #include <Adafruit_NeoPixel.h>
 
 //LEDによる点灯に関する変数
-const int LED_PIN = 2;     // 制御するピン
+const int LED_PIN = 7;     // 制御するピン
 const int LED_COUNT = 150; // LEDの数
 
 //DT,SCKは実際の配線に応じる
-const int DT_PIN = 6;
-const int SCK_PIN = 7;
+const int DT_PIN = 4;
+const int SCK_PIN = 2;
 const int RST_PIN = 5;
 int RST_val;
 
