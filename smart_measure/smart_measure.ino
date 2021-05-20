@@ -8,7 +8,7 @@ const int LED_COUNT = 150; // LEDの数
 //DT,SCKは実際の配線に応じる
 const int DT_PIN = 4;
 const int SCK_PIN = 2;
-const int RST_PIN = 5;
+const int RST_PIN = 6;
 int RST_val;
 
 //キャリブレーション用変数。ロードセルに依存
@@ -37,7 +37,7 @@ void setup()
     pixels.show();
 }
 
-void lit_LED(int ichigo_weight)
+void lit_LED(float ichigo_weight)
 {
     pixels.clear();
     if (15 <= ichigo_weight && ichigo_weight <= 19)       //Lサイズの場合
