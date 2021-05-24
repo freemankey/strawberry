@@ -40,15 +40,15 @@ void setup()
 void lit_LED(float ichigo_weight)
 {
     pixels.clear();
-    if (15 <= ichigo_weight && ichigo_weight <= 19)       //Lサイズの場合
+    if (29 <= ichigo_weight && ichigo_weight <= 33)       //Lサイズの場合
         pixels.setPixelColor(0, pixels.Color(255, 0, 0)); // 0番目の色を赤に変える
-    else if (12 <= ichigo_weight && ichigo_weight <= 15)  //Mサイズの場合
+    else if (20 <= ichigo_weight && ichigo_weight <= 28)  //Mサイズの場合
         pixels.setPixelColor(0, pixels.Color(0, 255, 0)); // 0番目の色を緑に変える
-    else if (9 <= ichigo_weight && ichigo_weight < 12)    //Sサイズの場合
+    else if (16 <= ichigo_weight && ichigo_weight <= 19)  //Sサイズの場合
         pixels.setPixelColor(0, pixels.Color(0, 0, 255)); // 0番目の色を青に変える
-    else if (5 <= ichigo_weight && ichigo_weight <= 9)
+    else if (12 <= ichigo_weight && ichigo_weight <= 15)
         pixels.setPixelColor(0, pixels.Color(255, 255, 0)); // 0番目の色を黄色に変える
-    else if (ichigo_weight > 0)
+    else if (ichigo_weight <= 11 || ichigo_weight >= 33)
         pixels.setPixelColor(0, pixels.Color(255, 255, 255)); // 0番目の色を白に変える
     else
         pixels.setPixelColor(0, pixels.Color(0, 0, 0));
