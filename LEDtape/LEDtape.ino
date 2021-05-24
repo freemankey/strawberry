@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 
 const int DIN_PIN = 2; // 制御するピン
-const int LED_COUNT = 150; // LEDの数
+const int LED_COUNT = 5; // LEDの数
 
 
 const int pin = 4;//スイッチのピン
@@ -10,13 +10,15 @@ int value = 0;
 Adafruit_NeoPixel pixels(LED_COUNT, DIN_PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
-  pinMode(pin, INPUT);
+  // pinMode(pin, INPUT);
+  pinMode(pin, INPUT_PULLUP);
   Serial.begin(9600);
   pixels.begin();
 }
 
 void loop() {
   value = digitalRead(pin);
+  Serial.println(value);
   if(value == 0){
     pixels.clear();
     

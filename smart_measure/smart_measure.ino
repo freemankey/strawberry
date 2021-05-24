@@ -32,16 +32,15 @@ void loop()
     {
         Serial.println("reset!!");
         b_weight = n_weight;
+        ichigo_weight=0;
     }
     else
     {
         n_weight = scale.get_units(10);
         if (abs(n_weight - p_weight) < error && abs(n_weight - b_weight) >= 5) /*現在値が前回値よりerror値よりも小さくなっていればイチゴが取られたと判定する*/
         {
-            ichigo_weight = n_weight - b_weight;
-            　 //イチゴの値を更新＊ただし，この値は数ループの間しか保持できない
-                b_weight = n_weight;
-            　 //基準値をリセット
+            ichigo_weight = n_weight - b_weight;//イチゴの値を更新＊ただし，この値は数ループの間しか保持できない
+                b_weight = n_weight; //基準値をリセット
         }
         p_weight = n_weight;
 
@@ -57,9 +56,10 @@ void loop()
         Serial.println(b_weight);
         Serial.println(p_weight);
         */
-        Serial.println(n_weight - b_weight);
-        　 //現在値と基準値の誤差を表示する
-            Serial.print("     weight:  ");
+        Serial.print(n_weight - b_weight); //現在値と基準値の誤差を表示する
+        Serial.print("      ");
+        Serial.println(n_weight-p_weight);
+            Serial.print("     ichigo weight: ");
         Serial.println(ichigo_weight); //
 
         scale.power_down();
