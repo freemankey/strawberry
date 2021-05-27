@@ -37,22 +37,31 @@ void setup()
     pixels.show();
 }
 
-void lit_LED(float ichigo_weight)
+void lit_LED(float ichigo_weight, bool flag)
 {
     pixels.clear();
     if (29 <= ichigo_weight && ichigo_weight <= 33)       //Lサイズの場合
-        pixels.setPixelColor(0, pixels.Color(255, 0, 0)); // 0番目の色を赤に変える
+        pixels.setPixelColor(3, pixels.Color(255, 0, 0)); // 0番目の色を赤に変える
     else if (20 <= ichigo_weight && ichigo_weight <= 28)  //Mサイズの場合
-        pixels.setPixelColor(0, pixels.Color(0, 255, 0)); // 0番目の色を緑に変える
+        pixels.setPixelColor(2, pixels.Color(0, 255, 0)); // 0番目の色を緑に変える
     else if (16 <= ichigo_weight && ichigo_weight <= 19)  //Sサイズの場合
-        pixels.setPixelColor(0, pixels.Color(0, 0, 255)); // 0番目の色を青に変える
+        pixels.setPixelColor(1, pixels.Color(0, 0, 255)); // 0番目の色を青に変える
     else if (12 <= ichigo_weight && ichigo_weight <= 15)
         pixels.setPixelColor(0, pixels.Color(255, 255, 0)); // 0番目の色を黄色に変える
-    else if ((0<=ichigo_weight&& ichigo_weight <= 11 )|| ichigo_weight >= 33)
-        pixels.setPixelColor(0, pixels.Color(255, 255, 255)); // 0番目の色を白に変える
-    else if(ichigo_weight<0)
-        pixels.setPixelColor(0, pixels.Color(0, 0, 0));
+    else if ((0 <= ichigo_weight && ichigo_weight <= 11) || ichigo_weight >= 33)
+        pixels.setPixelColor(4          , pixels.Color(255, 255, 255)); // 0番目の色を白に変える
+    else if (ichigo_weight < 0)
+    {
+        for (int i = 0; i < 5; i++)
+            pixels.setPixelColor(i, pixels.Color(0, 0, 0));
+    }
     pixels.show();
+    if (!flag)
+    {
+        pixels.clear();
+        pixels.setPixelColor(0, pixels.Color(0, 0, 0));
+        pixels.show();
+    }
 }
 void loop()
 {
@@ -65,32 +74,30 @@ void loop()
         ichigo_weight = 0;
 
         pixels.clear();
+        pixels.setPixelColor(3, pixels.Color(255, 0, 0));     // 0番目の色を赤に変える
+        pixels.setPixelColor(2, pixels.Color(0, 255, 0));     // 0番目の色を緑に変える
+        pixels.setPixelColor(1, pixels.Color(0, 0, 255));     // 0番目の色を青に変える
+        pixels.setPixelColor(0, pixels.Color(255, 255, 0));   // 0番目の色を黄色に変える
+        pixels.setPixelColor(4, pixels.Color(255, 255, 255)); // 0番目の色を白に変える
+        pixels.show();
+
+        delay(1500);
+        pixels.clear();
         pixels.setPixelColor(0, pixels.Color(0, 0, 0));
         pixels.show();
     }
     else
     {
         n_weight = scale.get_units(10);
-        if (abs(n_weight - p_weight) < error && abs(n_weight - b_weight) >= 5) /*現在値が前回値よりerror値よりも小さくなっていればイチゴが取られたと判定する*/
+        if (abs(n_weight-p_weight)<error &&abs(n_weight - b_weight) >= 5) /*現在値が前回値よりerror値よりも小さくなっていればイチゴが取られたと判定する*/
         {
             ichigo_weight = -(n_weight - b_weight); //イチゴの値を更新＊ただし，この値は数ループの間しか保持できない
             b_weight = n_weight;                    //基準値をリセット
-            lit_LED(ichigo_weight);
+                        lit_LED(ichigo_weight, true);
         }
+        else if(abs(n_weight-b_weight)>=5)
+        lit_LED(-(n_weight-b_weight),false);
         p_weight = n_weight;
-
-        /*
-        改案
-        ・itigo_weight の値を5g以上の値に絞ってリストで保存（0g付近の値は無視）
-        ・itigo_weightの値を次のイチゴが取り除かれるまで保持　ichigo_weigtの中身が再び一定値以上なるまで値を保持するとか
-       　どっちかできません？
-        */
-
-        /*デバッグ用
-        Serial.println(n_weight);
-        Serial.println(b_weight);
-        Serial.println(p_weight);
-        */
         Serial.println(n_weight - b_weight); //現在値と基準値の誤差を表示する
         Serial.print("    ichigo weight:  ");
         Serial.println(ichigo_weight);
