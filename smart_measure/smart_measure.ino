@@ -48,9 +48,9 @@ void lit_LED(float ichigo_weight)
         pixels.setPixelColor(0, pixels.Color(0, 0, 255)); // 0番目の色を青に変える
     else if (12 <= ichigo_weight && ichigo_weight <= 15)
         pixels.setPixelColor(0, pixels.Color(255, 255, 0)); // 0番目の色を黄色に変える
-    else if (ichigo_weight <= 11 || ichigo_weight >= 33)
+    else if ((0<=ichigo_weight&& ichigo_weight <= 11 )|| ichigo_weight >= 33)
         pixels.setPixelColor(0, pixels.Color(255, 255, 255)); // 0番目の色を白に変える
-    else
+    else if(ichigo_weight<0)
         pixels.setPixelColor(0, pixels.Color(0, 0, 0));
     pixels.show();
 }
