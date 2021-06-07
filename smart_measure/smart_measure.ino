@@ -12,7 +12,7 @@ const int RST_PIN = 6;
 int RST_val;
 
 //キャリブレーション用変数。ロードセルに依存
-const float calibrate_dec = -244.95;
+const float calibrate_dec = -252.55;
 
 //イチゴの重量を測定に関する変数
 float b_weight = -1.0;   //基準値_base
